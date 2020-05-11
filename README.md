@@ -1,0 +1,1 @@
+# equacao_2grau
