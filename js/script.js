@@ -191,12 +191,22 @@ function decimal() {
     div.appendChild(escreva)
     document.querySelector('#num').value = ''
 }
+function isIndex(){
+    if(location.pathname.split('/')[2] == '' || location.href.split('#').join('').split('/').indexOf('index.html') != -1 && location.protocol != 'http:' && location.protocol != 'https:'){
+        return true
+    } else if(location.pathname.split('/')[2] == 'index.html'){
+        return true
+    } else {
+        return false
+    }
+}
+
 addEventListener('load', () => {
     const link = location.href.split('#').join('').split('/')
     if (localStorage.login == 'true' && link.indexOf('login.html') == -1) {
         document.querySelector('#login').innerHTML = `<button class="btn btn-outline-success my-2 my-sm-0" onclick="javascript:window.location.href = 'index.html'; localStorage.login = false; localStorage.link = 'index.html'; let a = JSON.parse(localStorage.user); a.forEach( (e, i) =>{if(e.logado == true){a[i].logado = false; localStorage.user = JSON.stringify(a)}});">Sair</button>`
         document.querySelector('#rodapeSair').innerHTML = `<a href='#' class="text-white" onclick="javascript:window.location.href = 'index.html'; localStorage.login = false; localStorage.link = 'index.html'; let a = JSON.parse(localStorage.user); a.forEach( (e, i) =>{if(e.logado == true){a[i].logado = false; localStorage.user = JSON.stringify(a)}});">Sair</a>`
-        if (link.indexOf('index.html') != -1) {
+        if (isIndex()) {
             let user = JSON.parse(localStorage.user)
             let nome
             let ultimaPag
@@ -216,22 +226,21 @@ addEventListener('load', () => {
             }
         }
     }
-    if (localStorage.login == 'true' && link.indexOf('login.html') != -1) {
+	if (localStorage.login == 'true' && link.indexOf('login.html') != -1) {
         let user = JSON.parse(localStorage.user)
-        user.forEach((e, i) => {
-            if (e.logado == true) {
-                user[i].logado = false
-            }
-        })
-        localStorage.user = JSON.stringify(user)
-        localStorage.login = false
-    }
-    if (localStorage.login == 'false' && link.indexOf('login.html') != -1 || !localStorage.getItem('login')) {
-        if (link.indexOf('index.html') == -1 && link.indexOf('login.html') == -1) {
-            location.href = 'login.html'
-        }
-    }
+	       user.forEach((e, i) => {
+	           if (e.logado == true) {
+	            	user[i].logado = false
+	         	}
+	        })
+	    localStorage.user = JSON.stringify(user)
+	    localStorage.login = false
+	}
+	if (localStorage.login == 'false' && link.indexOf('login.html') == -1 && !isIndex() || !localStorage.getItem('login')){
+	    location.href = 'login.html'
+	}
 })
+
 function verificacao(link2 = 'index.html') {
     const link = location.href.split('/')
     if (localStorage.login != 'true') {

@@ -66,8 +66,13 @@ class Equacao{
                     if(resp2.cima == 1){
                         resp2.cima = ''
                     }
-                    x1.parte2 = resp2 != 1 ? `${resp2.cima}√${resp.sobra}/${resp2.baixo}`: `√${resp.sobra}`
-                    x2.parte2 = resp2 != 1 ? `${resp2.cima}√${resp.sobra}/${resp2.baixo}`: `√${resp.sobra}`
+                    if(Number.isInteger(resp2)){
+                        x1.parte2 = resp2 != 1 ? `${resp2}√${resp.sobra}`: `√${resp.sobra}`
+                        x2.parte2 = resp2 != 1 ? `${resp2}√${resp.sobra}`: `√${resp.sobra}`
+                    } else {
+                        x1.parte2 = resp2 != 1 ? `${resp2.cima}√${resp.sobra}/${resp2.baixo}`: `√${resp.sobra}`
+                        x2.parte2 = resp2 != 1 ? `${resp2.cima}√${resp.sobra}/${resp2.baixo}`: `√${resp.sobra}`
+                    }
                     x1.total = `${x1.parte1} + ${x1.parte2}`
                     x2.total = `${x2.parte1} - ${x2.parte2}`
                 }
