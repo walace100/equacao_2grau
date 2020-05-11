@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        <title>Login</title>
+    </head>
+    <body>
+        <div id="dadosError" class="alert alert-danger alert-dismissible fade show" dismiss="alert" role="alert" style="display:none;">
+            Dados fornecidos incorretos!
+            <button type="button" class="close" onclick="javascript:$('#dadosError').hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div id="emailError" class="alert alert-danger alert-dismissible fade show" dismiss="alert" role="alert" style="display:none;">
+            E-mail existente!
+            <button type="button" class="close" onclick="javascript:$('#emailError').hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div id="senhaError" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none;">
+            Senha de confirmação diferente da senha!
+            <button type="button" class="close "onclick="javascript:$('#senhaError').hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal fade" id="meumodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form>
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Registre-se</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="nome">Nome completo</label>
+                                <input type="text" class="form-control" id="nome" placeholder="Gil da Esfirra dos Santos" required>
+                            </div>      
+                            <div class="form-group">
+                                <label for="email">Endereço e-mail</label>
+                                <input type="email" class="form-control" id="email" placeholder="Seu e-mail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="senha">Senha</label>
+                                <input type="password" class="form-control" id="senha" placeholder="Senha" min="1" required>
+                            </div>   
+                            <div class="form-group">
+                                <label for="confirm">Confirme sua senha</label>
+                                <input type="password" class="form-control" id="confirm" placeholder="Senha" min="1" required>
+                            </div>       
+                            <small>Ao se registrar você concorda com os <a href="#" onclick="javascript:$('#meumodal2').modal('show')">termos de uso</a></small>       
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-dark" onclick="registro()">Registrar-se</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="meumodal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Termos de Uso</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Ao cadastrar-se você concorda em fornecer-nos seus dados pessoais, com prazo ilimitado e alcance mundial, livre de Royalties afim de criação de contas em site de entretenimento, como xvideos ou pornhub, ou para grandes empresas, como o Google e Facebook, sem pensar duas vezes. Entretanto você aceita que não é possível apagar sua conta por meios viáveis. Caso já tenha criado uma conta e se arepende disso após ler os termos de uso, apague os dados do navegador para apagar a conta por meios ilícitos, caso demore provavelmente seus dados já foram vendidos ou foram usados para criar contas em sites adultos.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="div-central">
+           <div class="container-fluid">
+               <h1 class="text-center">Login</h1>
+                <form>
+                    <div class="form-group">
+                        <span>Para prosseguir faça o login ou crie uma conta.</span>
+                        <label for="emailLogin">E-mail: </label>
+                        <input type="emailLogin" class="form-control" id="emailLogin" placeholder="Seu e-mail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="senhaLogin">Senha: </label>
+                        <input type="password" class="form-control" id="senhaLogin" placeholder="Senha" required>
+                    </div>
+                    <button type="button" class="btn btn-dark" onclick="login()">Login</button>
+                    <a href="#" onclick="javascript:$('#meumodal').modal('show')">registre-se</a>
+                    <a href="#" onclick="javascript:$('#meumodal2').modal('show')">termos de uso</a>
+                    <a href="#" onclick="javascript:history.go(-1)">Voltar</a>
+                </form>
+           </div>
+        </div>
+    </body>
+    <script src="js/jquery-3.3.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/class.js"></script>
+    <script src="js/script.js"></script>
+</html>

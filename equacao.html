@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        <title>Equação do Segundo Grau</title>
+        <style type="text/css">
+            @media screen and (max-width: 768px){
+                .col.md-4{
+                    margin-bottom: 20px !important; 
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Página Inicial<span class="sr-only"></span></a>
+                    </li>
+                    <li class="nav-item active" onclick="verificacao('raiz.html')">
+                        <a class="nav-link" href="#">Simplificador de Raiz<span class="sr-only"></span></a>
+                    </li>
+                    <li class="nav-item active" onclick="verificacao('fracao.html')">
+                        <a class="nav-link" href="#">Conversor para Fração<span class="sr-only"></span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="equacao.html">Calculadora de Equação Quadrática<span class="sr-only"></span></a>
+                    </li>
+                </ul>
+                <span id="login">
+                    <button class="btn btn-outline-success my-2 my-sm-0" onclick="javascript:window.location.href = 'login.html'">Entrar</button>
+                </span>
+            </div>
+        </nav>
+        <div id="dadosError" class="alert alert-danger alert-dismissible fade show" dismiss="alert" role="alert" style="display:none;">
+            Dados fornecidos incorretos!
+            <button type="button" class="close" onclick="javascript:$('#dadosError').hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="container-fluid text-center">
+            <h1 class="display-4">Calculadora de Função Quadrática</h1>
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <label for="a">Valor de A:</label>
+                    <input type="number" id="a" max="1000" min="-1000">
+                </div>
+                <div class="col-md-4">
+                    <label for="b">Valor de B:</label>
+                    <input type="number" id="b" max="1000" min="-1000">
+                </div>
+                <div class="col-md-4">
+                    <label for="c">Valor de C:</label>
+                    <input type="number" id="c" max="1000" min="-1000">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-dark" onclick="calcular()">Calcular</button>
+        </div>
+        <div id="divSaida">
+            <!-- <canvas height="500" width="auto"></canvas> -->
+        </div>
+        <div class="container-fluid bg-dark text-center text-white rodape rodapeFixo">
+            <div class="row rodape2">
+                <div class="col-md-4">
+                    <ul>
+                        <li><a href="index.html" class="text-white">Página Inicial</a></li>
+                        <li><a href="#" class="text-white" onclick="verificacao('raiz.html')">Simplificador de Raiz</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                        <ul>
+                            <li><a href="#" class="text-white" onclick="verificacao('fracao.html')">Conversor para Fração</a></li>
+                            <li><a href="#" class="text-white" onclick="verificacao('equacao.html')">Calculadora de Equação Quadrática</a></li>
+                        </ul>
+                </div>
+                <div class="col-md-4">
+                        <ul>
+                            <li id="rodapeSair"><a href="#" class="text-white" onclick="javascript:window.location.href = 'login.html'">Entrar</a></li>
+                        </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="js/jquery-3.3.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/class.js"></script>
+    <script src="js/script.js"></script>
+</html>
