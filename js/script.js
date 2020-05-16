@@ -262,14 +262,12 @@ function verificacao(link2 = 'index.html') {
         }
     } else {
         let user = JSON.parse(localStorage.user)
-        if (isPage(link2)) {
-            if (link2 != 'index.html') {
-                user.forEach((e, i) => {
-                    if (e.logado == true) {
-                        user[i].ultimaPag = link2
-                    }
-                })
-            }
+        if (!isPage(link2) && link2 != 'index.html') {
+            user.forEach((e, i) => {
+                if (e.logado == true) {
+                    user[i].ultimaPag = link2
+                }
+            })
             localStorage.user = JSON.stringify(user)
             location.href = link2
         }
