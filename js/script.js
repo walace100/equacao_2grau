@@ -8,7 +8,6 @@ function calcular() {
     }
     const div = document.querySelector('.container-fluid')
     const body = document.querySelector('#divSaida')
-    const canvas = document.createElement('canvas')
     let escreva = document.createElement('div')
     if (document.querySelector('#saida') != null) {
         const remover = div.removeChild(document.querySelector('#saida'))
@@ -40,9 +39,7 @@ function calcular() {
     escreva.innerHTML += `X do vértice: <strong>${equacao.Xv}</strong><br>`
     escreva.innerHTML += `Y do vértice: <strong>${equacao.Yv}</strong><br>`
     div.appendChild(escreva)
-    //body.appendChild(canvas)
     document.querySelector('.rodapeFixo').classList.remove('rodapeFixo')
-    //grafico = new Grafico(equacao.x1, equacao.x2, equacao.Xv, equacao.Yv, equacao.delta, 'canvas', 500)
 }
 function registro() {
     if (document.querySelector('#nome').value == '' || document.querySelector('#email').value == '' || document.querySelector('#senha').value == '' || document.querySelector('#confirm').value == '') {
@@ -101,9 +98,10 @@ function registro() {
 function login() {
     if (!localStorage.login) {
         localStorage.login = JSON.stringify(false)
-        localStorage.link = 'index.html'
         localStorage.user = JSON.stringify([{ nome: 'admin', email: 'admin@gmail.com', senha: '123', logado: false, ultimaPag: 'index.html' }])
     }
+    if(!localStorage.link) 
+        localStorage.link = 'index.html'
     if (document.querySelector('#emailLogin').value == '' || document.querySelector('#senhaLogin').value == '') {
         $('#dadosError').show()
         return
@@ -191,42 +189,38 @@ function decimal() {
     div.appendChild(escreva)
     document.querySelector('#num').value = ''
 }
-function isIndex(){
-    if(location.pathname.split('/')[2] == '' || location.href.split('#').join('').split('/').indexOf('index.html') != -1 && location.protocol != 'http:' && location.protocol != 'https:'){
+function isPage(page = "index.html"){
+    if(location.pathname.split('/')[2] == '' || location.href.split('#').join('').split('/').indexOf(page) != -1 && location.protocol != 'http:' && location.protocol != 'https:'){
         return true
-    } else if(location.pathname.split('/')[2] == 'index.html'){
+    } else if(location.pathname.split('/')[2] == page){
         return true
     } else {
         return false
     }
 }
-
 addEventListener('load', () => {
-    const link = location.href.split('#').join('').split('/')
-    if (localStorage.login == 'true' && link.indexOf('login.html') == -1) {
+    if (localStorage.login == 'true' && isPage()) {
         document.querySelector('#login').innerHTML = `<button class="btn btn-outline-success my-2 my-sm-0" onclick="javascript:window.location.href = 'index.html'; localStorage.login = false; localStorage.link = 'index.html'; let a = JSON.parse(localStorage.user); a.forEach( (e, i) =>{if(e.logado == true){a[i].logado = false; localStorage.user = JSON.stringify(a)}});">Sair</button>`
         document.querySelector('#rodapeSair').innerHTML = `<a href='#' class="text-white" onclick="javascript:window.location.href = 'index.html'; localStorage.login = false; localStorage.link = 'index.html'; let a = JSON.parse(localStorage.user); a.forEach( (e, i) =>{if(e.logado == true){a[i].logado = false; localStorage.user = JSON.stringify(a)}});">Sair</a>`
-        if (isIndex()) {
-            let user = JSON.parse(localStorage.user)
-            let nome
-            let ultimaPag
-            user.forEach(e => {
-                if (e.logado == true) {
-                    nome = e.nome
-                    ultimaPag = e.ultimaPag
-                }
-            })
-            document.querySelector('#nomeTitulo').innerHTML = `Bem Vindo, ${nome}!`
-            if (ultimaPag != 'index.html') {
-                let p = document.createElement('p')
-                p.innerHTML = `Deseja voltar para a última página visitada? clique <a href="${ultimaPag}" style="color: green;">aqui</a>`
-                let pIrmao = document.querySelector('#pIrmao')
-                let pai = pIrmao.parentNode
-                pai.insertBefore(p, pIrmao)
+        let user = JSON.parse(localStorage.user)
+        let nome
+        let ultimaPag
+        user.forEach(e => {
+            if (e.logado == true) {
+                nome = e.nome
+                ultimaPag = e.ultimaPag
             }
+        })
+        document.querySelector('#nomeTitulo').innerHTML = `Bem Vindo, ${nome}!`
+        if (ultimaPag != 'index.html') {
+            let p = document.createElement('p')
+            p.innerHTML = `Deseja voltar para a última página visitada? clique <a href="${ultimaPag}" style="color: green;">aqui</a>`
+            let pIrmao = document.querySelector('#pIrmao')
+            let pai = pIrmao.parentNode
+            pai.insertBefore(p, pIrmao)
         }
     }
-	if (localStorage.login == 'true' && link.indexOf('login.html') != -1) {
+	if (localStorage.login == 'true' && isPage("login.html")) {
         let user = JSON.parse(localStorage.user)
 	       user.forEach((e, i) => {
 	           if (e.logado == true) {
@@ -236,21 +230,20 @@ addEventListener('load', () => {
 	    localStorage.user = JSON.stringify(user)
 	    localStorage.login = false
 	}
-	if (localStorage.login == 'false' && link.indexOf('login.html') == -1 && !isIndex() || !localStorage.getItem('login')){
+	if (!localStorage.getItem('login') && localStorage.login == 'false' && !isPage("login.html") && !isPage()){
 	    location.href = 'login.html'
 	}
 })
 
 function verificacao(link2 = 'index.html') {
-    const link = location.href.split('/')
     if (localStorage.login != 'true') {
-        if (link.indexOf('index.html') == -1 && link.indexOf('login.html') == -1) {
+        if (!isPage("login")) {
             localStorage.link = link2
             location.href = 'login.html'
         }
     } else {
         let user = JSON.parse(localStorage.user)
-        if (link.indexOf(link2) == -1) {
+        if (isPage(link2)) {
             if (link2 != 'index.html') {
                 user.forEach((e, i) => {
                     if (e.logado == true) {
