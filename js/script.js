@@ -199,25 +199,44 @@ function isPage(page = "index.html"){
     }
 }
 addEventListener('load', () => {
-    if (localStorage.login == 'true' && isPage()) {
-        document.querySelector('#login').innerHTML = `<button class="btn btn-outline-success my-2 my-sm-0" onclick="javascript:window.location.href = 'index.html'; localStorage.login = false; localStorage.link = 'index.html'; let a = JSON.parse(localStorage.user); a.forEach( (e, i) =>{if(e.logado == true){a[i].logado = false; localStorage.user = JSON.stringify(a)}});">Sair</button>`
-        document.querySelector('#rodapeSair').innerHTML = `<a href='#' class="text-white" onclick="javascript:window.location.href = 'index.html'; localStorage.login = false; localStorage.link = 'index.html'; let a = JSON.parse(localStorage.user); a.forEach( (e, i) =>{if(e.logado == true){a[i].logado = false; localStorage.user = JSON.stringify(a)}});">Sair</a>`
-        let user = JSON.parse(localStorage.user)
-        let nome
-        let ultimaPag
-        user.forEach(e => {
-            if (e.logado == true) {
-                nome = e.nome
-                ultimaPag = e.ultimaPag
+    if (localStorage.login == 'true' && !isPage("login.html")) {
+        document.querySelector('#login').innerHTML = `<button class="btn btn-outline-success my-2 my-sm-0" onclick="javascript:
+        window.location.href = 'index.html';
+        localStorage.login = false; localStorage.link = 'index.html';
+        let a = JSON.parse(localStorage.user); a.forEach( (e, i) =>{
+            if(e.logado == true){
+                a[i].logado = false; localStorage.user = JSON.stringify(a)
             }
-        })
-        document.querySelector('#nomeTitulo').innerHTML = `Bem Vindo, ${nome}!`
-        if (ultimaPag != 'index.html') {
-            let p = document.createElement('p')
-            p.innerHTML = `Deseja voltar para a última página visitada? clique <a href="${ultimaPag}" style="color: green;">aqui</a>`
-            let pIrmao = document.querySelector('#pIrmao')
-            let pai = pIrmao.parentNode
-            pai.insertBefore(p, pIrmao)
+        });">Sair</button>`
+        document.querySelector('#rodapeSair').innerHTML = `<a href='#' class="text-white" onclick="javascript:
+        window.location.href = 'index.html';
+        localStorage.login = false;
+        localStorage.link = 'index.html';
+        let a = JSON.parse(localStorage.user);
+        a.forEach( (e, i) =>{
+            if(e.logado == true){
+                a[i].logado = false;
+                localStorage.user = JSON.stringify(a)
+            }
+        });">Sair</a>`
+        if(isPage()){
+            let user = JSON.parse(localStorage.user)
+            let nome
+            let ultimaPag
+            user.forEach(e => {
+                if (e.logado == true) {
+                    nome = e.nome
+                    ultimaPag = e.ultimaPag
+                }
+            })
+            document.querySelector('#nomeTitulo').innerHTML = `Bem Vindo, ${nome}!`
+            if (ultimaPag != 'index.html') {
+                let p = document.createElement('p')
+                p.innerHTML = `Deseja voltar para a última página visitada? clique <a href="${ultimaPag}" style="color: green;">aqui</a>`
+                let pIrmao = document.querySelector('#pIrmao')
+                let pai = pIrmao.parentNode
+                pai.insertBefore(p, pIrmao)
+            }
         }
     }
 	if (localStorage.login == 'true' && isPage("login.html")) {
