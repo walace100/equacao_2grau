@@ -170,9 +170,9 @@ class Equacao{
         let cont = [] 
         if(!Number.isInteger(Math.sqrt(raiz))){
             for(let i = 0; i <= limite; i++){
-                let teste = function(){
+                let teste = () => {
                     let resp
-                    cont.forEach( e =>{
+                    cont.forEach( e => {
                         if(e.numero != i){
                             resp = true 
                         } else {
@@ -186,7 +186,7 @@ class Equacao{
                 }
                 do{
                     if(this.isPrimo(i) && Number.isInteger(raiz/i)){
-                        if(cont.length == 0 || teste() == true){
+                        if(cont.length == 0 || teste()){
                             cont.push({numero: i, vezes: 1})
                             raiz /= i
                         } else {
@@ -246,27 +246,3 @@ class Equacao{
         this.Yv = !Number.isInteger(yv) ? Number(yv.toFixed(2)): yv
     }
 } 
-// class Grafico{ sem tempo e paciencia para fazer, pois a resolução do grafico é ruim
-//     x1
-//     x2
-//     Xv
-//     Yv
-//     delta 
-//     canvas
-//     ctx
-//     altura
-//     constructor(x1, x2, xv, yv, delta, canvas, altura){
-//         this.x1 = x1
-//         this.x2 = x2
-//         this.Xv = xv
-//         this.Yv = yv
-//         this.delta = delta
-//         this.canvas = document.querySelector(canvas)
-//         this.altura = altura
-//         this.ctx = this.canvas.getContext('2d')
-//         this.grade()
-//     }
-//     grade(){
-        
-//     }
-// }
